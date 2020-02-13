@@ -12,8 +12,8 @@ net install enahodata from(https://https://github.com/MaykolMedrano/enahodata/ra
 Select a module of interest and year. Then, run:
 
 ```stata
-    enahodata inei, modulo(01) año(2018)
-    enahodata inei, modulo(34) año(2017)
+ enahodata inei, modulo(01) año(2018)
+ enahodata inei, modulo(34) año(2017)
 ```
 
 ## Notes
