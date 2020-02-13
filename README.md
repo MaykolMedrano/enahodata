@@ -4,7 +4,7 @@
 
 ```
 cap ado uninstall enahodata 
-net install enahodata from(https://https://github.com/MaykolMedrano/enahodata/raw/master/source/)
+net install enahodata from(https://github.com/MaykolMedrano/enahodata/raw/master/source/)
 ```
 
 ## Usage
