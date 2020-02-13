@@ -1,0 +1,10 @@
+v 1
+d Maykol Medrano, National University of San Antonio Abad of Cusco (maykolmedrano35@gmail.com)
+p enahodata ENAHODATA- Import National Household Survey on Living Conditions and Poverty data from INEI - Perú
+
+* l word-to-show path-or-url [description]
+* t: Directories within site:
+* t path [description]
+* Packages:
+* p pkgname [description]
+

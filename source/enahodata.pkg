@@ -1,0 +1,15 @@
+v 1
+
+d enahodata. Import National Household Survey on Living Conditions and Poverty data from INEI - Perú
+d
+d Author: Maykol Medrano.
+d
+d KW: data
+d KW: enaho
+d KW: inei
+d
+d Requires: Stata version 15 and Windows 10
+d
+d Distribution-Date: 2020
+f enahodata.ado
+f enahodata.sthlp
