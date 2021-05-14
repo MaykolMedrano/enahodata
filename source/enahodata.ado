@@ -45,7 +45,7 @@ if length(`"`modulo'"') != 0 {
 	//Intercambiamos el codigo por el año de encuesta
 
 	if "`año'"=="2020" {
-		local año 693
+		local año 737
 		local year 2020
 	}
 	else if "`año'"=="2019" {
