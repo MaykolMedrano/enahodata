@@ -44,7 +44,12 @@ if length(`"`modulo'"') != 0 {
 ********************************************************************************
 	//Intercambiamos el codigo por el año de encuesta
 
-	if "`año'"=="2021" {
+
+	if "`año'"=="2022" {
+		local año 784
+		local year 2022
+	}
+	else if "`año'"=="2021" {
 		local año 759
 		local year 2021
 	}
