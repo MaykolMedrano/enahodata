@@ -127,7 +127,6 @@ if length(`"`modulo'"') != 0 {
 ********************************************************************************
 	//Usamos el comando nativo copy para descargar los datos
 di in green "Importing modulo_`modulo'_`año' from {browse www.inei.gob.pe/bases-de-datos:INEI database.}"	
-
 copy "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/STATA/`año'-Modulo`modulo'.zip"  modulo_`modulo'_`year'.zip
 	di in green "Descarga exitosa"
 	di in green "Consulte por más datos aquí:{browse www.inei.gob.pe:www.inei.gob.pe}"
