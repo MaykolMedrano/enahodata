@@ -1,8 +1,8 @@
 *! enahodata: 
-*! Version 2.3.1: 2020/10/02
+*! Version 2.3.2: 2024/09/19
 *! Author: Maykol Medrano
-*! Department of Economics
-*! CICEPP
+*! Institute of Economics
+*! UC
 *! maykolmedrano35@gmail.com
 
 
@@ -45,9 +45,14 @@ if length(`"`modulo'"') != 0 {
 	//Intercambiamos el codigo por el año de encuesta
 
 
-	if "`año'"=="2022" {
+	if "`año'"=="2023" {
+		local año 000
+		local year 2023
+	}
+	else if "`año'"=="2022" {
 		local año 784
 		local year 2022
+	}
 	}
 	else if "`año'"=="2021" {
 		local año 759
