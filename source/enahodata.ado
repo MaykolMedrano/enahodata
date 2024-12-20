@@ -53,7 +53,6 @@ if length(`"`modulo'"') != 0 {
 		local año 784
 		local year 2022
 	}
-	}
 	else if "`año'"=="2021" {
 		local año 759
 		local year 2021
