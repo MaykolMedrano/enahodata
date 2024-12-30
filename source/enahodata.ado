@@ -46,7 +46,7 @@ if length(`"`modulo'"') != 0 {
 
 
 	if "`año'"=="2023" {
-		local año 000
+		local año 906
 		local year 2023
 	}
 	else if "`año'"=="2022" {
