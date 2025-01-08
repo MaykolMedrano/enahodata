@@ -93,7 +93,18 @@ II. Descripción del comando
 El comando principal es enahodata2. Su **sintaxis** es:
 
 ```
-enahodata2, ///    modulo(string) ///    año(string)    ///    [ ///      panel           ///      path(string)    ///      descomprimir    ///      PREServe        ///      condition(string) ///      replace         ///      load    ]
+enahodata, ///
+  MODulo(string) ///
+  año(string)    ///
+  [ ///
+    panel            ///
+    path(string)     ///
+    DEScomprimir     ///
+    PREServe         ///
+    condition(string) ///
+    replace          ///
+    load
+  ]
 ```
 
 ### Parámetros:
@@ -124,8 +135,11 @@ III. Ejemplo práctico
 
 **Ejemplo**: Descargar el **módulo 01** del **año 2023**, descomprimir y cargar el primer .dta encontrado (>5MB), en la carpeta C:\\Users\\User\\Desktop\\pruebas\\stata, sobrescribiendo si existiera:
 
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   enahodata2, ///      modulo("01") ///      año("2023") ///      path("C:\Users\User\Desktop\pruebas\stata") ///      descomprimir load replace   `
-
+```
+enahodata, modulo("01") año("2023") ///
+    path("C:\Users\User\Desktop\pruebas\stata") ///
+    DEScomprimir load replace
+```
 **Comportamiento**:
 
 1.  Baja el archivo 906-Modulo01.zip desde la URL oficial.
@@ -145,7 +159,12 @@ Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQL
 
 **Ejemplo**: Descargar el **módulo 1474** del **año 2023** (panel), descomprimir y cargar en memoria:
 
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   enahodata2, ///      modulo("1474") ///      año("2023") ///      panel ///      path("C:\Users\User\Desktop\panel_enaho") ///      descomprimir load replace   `
+```
+enahodata, modulo("1474") año("2023") ///
+    panel ///
+    path("C:\Users\User\Desktop\panel_enaho") ///
+    DEScomprimir load replace
+```
 
 **Comportamiento**:
 
@@ -163,17 +182,24 @@ Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQL
 ### 3) Descargar sin descomprimir
 
 Si quieres **solo** descargar el ZIP (sin descomprimir ni cargar en memoria):
-
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   enahodata2, ///      modulo("01") ///      año("2022") ///      path("C:\temp\enaho_zips") ///      replace   `
-
+```
+enahodata, modulo("01") año("2022") ///
+    path("D:\proyecto_enaho") ///
+    replace
+```
 **No** incluyes ni descomprimir ni load. De esa manera, el ZIP se mantendrá **intacto** en la carpeta destino.
 
 ### 4) Descargar varios años y módulos
 
 Supón que deseas **módulos 01 y 02** para **2022 y 2023**. Sencillamente:
 
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   enahodata2, ///      modulo("01 02") ///      año("2022 2023") ///      path("C:\Users\User\Desktop\enaho_multi") ///      descomprimir load replace   `
-
+```
+enahodata, ///
+    modulo("01 02") ///
+    año("2022 2023") ///
+    path("C:\multi_enaho") ///
+    DEScomprimir load
+```
 Generará todas las combinaciones (2022 - 01, 2022 - 02, 2023 - 01, 2023 - 02) y seguirá la misma lógica para cada par.
 
 ### Nota sobre archivos .dta
@@ -187,8 +213,7 @@ Este repositorio está autorizado bajo la **licencia MIT**. Ver [LICENSE](https:
 
 **¡Listo!** Con este comando enahodata2, ya puedes automatizar la **descarga** y (opcional) **carga** de datos **ENAHO** (corte transversal o panel) dentro de **Stata**.
 
-## Notes
+## Notas
 
-The data will be downloaded in zip format. It is necessary to create a folder.
-
-- More information in the help file.
+Los datos se descargarán en formato zip. Es necesario crear una carpeta. 
+- Más información en el archivo de
