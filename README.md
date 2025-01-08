@@ -8,17 +8,13 @@ Este **comando** de **Stata**, llamado enahodata2, permite **descargar** y (opci
 Contenido
 ---------
 
-*   [Módulos de la Encuesta (Corte transversal)](https://chatgpt.com/c/67781e33-0f40-8013-930f-c5b8ab1dca25#módulos-de-la-encuesta-nacional-de-hogares-enaho)
-    
-*   [Datos de panel](https://chatgpt.com/c/67781e33-0f40-8013-930f-c5b8ab1dca25#datos-de-panel)
-    
-*   [I. Instalación](https://chatgpt.com/c/67781e33-0f40-8013-930f-c5b8ab1dca25#i-instalacion)
-    
-*   [II. Descripción del comando](https://chatgpt.com/c/67781e33-0f40-8013-930f-c5b8ab1dca25#ii-descripción-del-comando)
-    
-*   [III. Ejemplos prácticos](https://chatgpt.com/c/67781e33-0f40-8013-930f-c5b8ab1dca25#iii-ejemplo-práctico)
-    
-*   [Licencia](https://chatgpt.com/c/67781e33-0f40-8013-930f-c5b8ab1dca25#licencia)
+- [Módulos de la Encuesta (Corte transversal)](#corte-transversal)
+- [Datos de Panel](#datos-de-panel)
+- [I. Instalación](#i-instalación)
+- [II. Descripción del Comando](#ii-descripción-del-comando)
+- [III. Ejemplos Prácticos](#iii-ejemplos-prácticos)
+- [IV. Cómo Citar este Repositorio](#iv-cómo-citar-este-repositorio)
+- [Licencia](#licencia)
     
 
 Módulos de la Encuesta Nacional de Hogares (ENAHO)
@@ -223,6 +219,19 @@ Si utilizas **ENAHODATA** en tu investigación o trabajo académico, por favor c
 
 ```plaintext
 Medrano M. (2025). *ENAHODATA (versión Stata)* [Software]. GitHub. [URL del repositorio](https://github.com/MaykolMedrano/enahodata)
-
+```
+---
+title: "ENAHODATA (versión Stata)"
+version: "1.0.0"
+authors:
+  - name: "Maykol Medrano"
+    orcid: ""
+date-released: "08-01-2025"
+repository-code: "https://github.com/MaykolMedrano/enahodata"
+license: "MIT"
+citation:
+  text: |
+    Medrano, M. (2025). ENAHODATA (versión Stata) [Software]. GitHub. https://github.com/MaykolMedrano/enahodata
+---
 
 
