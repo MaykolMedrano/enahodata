@@ -1,7 +1,7 @@
 enahodata (versión Stata)
 =========================
 
-Este **comando** de Stata, llamado enahodata2, permite **descargar** y (opcionalmente) **descomprimir** los datos de la **Encuesta Nacional de Hogares (ENAHO)**, la cual se realiza cada año desde 2004 en Perú. Además, incluye la **opción** para descargar **datos de panel** (ENAHO PANEL).
+Este **comando** de **Stata**, llamado enahodata2, permite **descargar** y (opcionalmente) **descomprimir** los datos de la **Encuesta Nacional de Hogares (ENAHO)**, la cual se realiza cada año desde 2004 en Perú. Además, incluye la **opción** para descargar **datos de panel** (ENAHO PANEL).
 
 > **Ficha técnica**: [Consulta aquí](https://proyectos.inei.gob.pe/iinei/srienaho/Descarga/FichaTecnica/498-Ficha.pdf)
 
@@ -213,7 +213,5 @@ Licencia
 --------
 
 Este repositorio está autorizado bajo la **licencia MIT**. Ver [LICENSE](https://chatgpt.com/c/LICENSE) para más detalles.
-
-**¡Listo!** Con este comando enahodata2, ya puedes automatizar la **descarga** y (opcional) **carga** de datos **ENAHO** (corte transversal o panel) dentro de **Stata**.
 
 
