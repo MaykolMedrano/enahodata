@@ -63,7 +63,20 @@ Nro | Código Módulo | Módulo | Preguntas
 
 ### Datos de panel
 
-NroAñoCódigo MóduloMódulo12023-20181474Características de la Vivienda y del Hogar22023-20181475Educación32023-20181476Salud42023-20181477Empleo e Ingresos52023-20181478Sumarias ( Variables Calculadas )62023-20181479Características de los Miembros del Hogar72017-201101Características de la Vivienda y del Hogar82017-201103Educación92017-201104Salud102017-201105Empleo e Ingresos112017-201134Sumarias( Variables calculadas )122017-20111314Características de los Miembros del Hogar
+Nro | Año           | Código Módulo | Módulo
+:---|:-------------:|:------------:|:-----------------------------------------
+1|2023-2018|`1474`|Características de la Vivienda y del Hogar
+2|2023-2018|`1475`|Educación
+3|2023-2018|`1476`|Salud
+4|2023-2018|`1477`|Empleo e Ingresos
+5|2023-2018|`1478`|Sumarias ( Variables Calculadas )
+6|2023-2018|`1479`|Características de los Miembros del Hogar
+7|2017-2011|`01`|Características de la Vivienda y del Hogar
+8|2017-2011|`03`|Educación
+9|2017-2011|`04`|Salud
+10|2017-2011|`05`|Empleo e Ingresos
+11|2017-2011|`34`|Sumarias( Variables calculadas )
+12|2017-2011|`1314`|Características de los Miembros del Hogar
 
 I. Instalación
 --------------
@@ -73,14 +86,15 @@ cap ado uninstall enahodata
 net install enahodata, from(https://github.com/MaykolMedrano/enahodata/raw/master/source/)
 ```
 
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   * Para usarlo, basta con colocar el archivo enahodata2.ado  * en tu directorio de ado personal, o en la carpeta de tu proyecto:  * ...   `
 
 II. Descripción del comando
 ---------------------------
 
 El comando principal es enahodata2. Su **sintaxis** es:
 
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   enahodata2, ///    modulo(string) ///    año(string)    ///    [ ///      panel           ///      path(string)    ///      descomprimir    ///      PREServe        ///      condition(string) ///      replace         ///      load    ]   `
+```
+enahodata2, ///    modulo(string) ///    año(string)    ///    [ ///      panel           ///      path(string)    ///      descomprimir    ///      PREServe        ///      condition(string) ///      replace         ///      load    ]
+```
 
 ### Parámetros:
 
