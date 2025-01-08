@@ -93,16 +93,16 @@ II. Descripción del comando
 El comando principal es enahodata. Su **sintaxis** es:
 
 ```
-enahodata, ///
-  MODulo(string) ///
-  año(string)    ///
-  [ ///
-    panel            ///
-    path(string)     ///
-    DEScomprimir     ///
-    PREServe         ///
-    condition(string) ///
-    replace          ///
+enahodata,                ///
+  MODulo(string)          ///
+  año(string)            ///
+  [                      ///
+    panel                ///
+    path(string)         ///
+    DEScomprimir         ///
+    PREServe             ///
+    condition(string)   ///
+    replace             ///
     load
   ]
 ```
