@@ -215,3 +215,14 @@ Licencia
 Este repositorio está autorizado bajo la **licencia MIT**. Ver [LICENSE](https://chatgpt.com/c/LICENSE) para más detalles.
 
 
+## IV. Cómo Citar este Repositorio
+
+Si utilizas **ENAHODATA** en tu investigación o trabajo académico, por favor considera citar este repositorio de la siguiente manera:
+
+### Formato APA
+
+```plaintext
+Medrano M. (2025). *ENAHODATA (versión Stata)* [Software]. GitHub. [URL del repositorio](https://github.com/MaykolMedrano/enahodata)
+
+
+
