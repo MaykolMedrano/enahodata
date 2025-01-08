@@ -80,7 +80,7 @@ Nro | Año           | Código Módulo | Módulo
 
 I. Instalación
 --------------
-
+Copie el siguiente codigo en Stata y ejecute.
 ```
 cap ado uninstall enahodata 
 net install enahodata, from(https://github.com/MaykolMedrano/enahodata/raw/master/source/)
