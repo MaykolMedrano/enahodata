@@ -90,7 +90,7 @@ net install enahodata, from(https://github.com/MaykolMedrano/enahodata/raw/maste
 II. Descripción del comando
 ---------------------------
 
-El comando principal es enahodata2. Su **sintaxis** es:
+El comando principal es enahodata. Su **sintaxis** es:
 
 ```
 enahodata, ///
@@ -137,16 +137,16 @@ III. Ejemplo práctico
 
 ```
 enahodata, modulo("01") año("2023") ///
-    path("C:\Users\User\Desktop\pruebas\stata") ///
+    path("/path/to/your/directory") ///
     DEScomprimir load replace
 ```
 **Comportamiento**:
 
 1.  Baja el archivo 906-Modulo01.zip desde la URL oficial.
     
-2.  Lo almacena en C:\\Users\\User\\Desktop\\pruebas\\stata\\modulo\_01\_2023.zip.
+2.  Lo almacena en "/path/to/your/directory/modulo_01_2023.zip.
     
-3.  Si se especificó descomprimir, crea la carpeta C:\\Users\\User\\Desktop\\pruebas\\stata\\modulo\_01\_2023\\ y extrae los .dta.
+3.  Si se especificó descomprimir, crea la carpeta /path/to/your/directory/modulo_01_2023 y extrae los .dta.
     
 4.  Si se incluyó load, busca un .dta mayor a 5 MB y lo **carga en memoria**.
     
@@ -162,17 +162,17 @@ enahodata, modulo("01") año("2023") ///
 ```
 enahodata, modulo("1474") año("2023") ///
     panel ///
-    path("C:\Users\User\Desktop\panel_enaho") ///
+    path("/path/to/your/directory") ///
     DEScomprimir load replace
 ```
 
 **Comportamiento**:
 
-1.  Usa la tabla de códigos **panel** y detecta que 2023 corresponde a inei\_code=912.
+1.  Usa la tabla de códigos **panel** y detecta que 2023 corresponde a inei_code=912.
     
-2.  Descarga 912-Modulo1474.zip y lo guarda en C:\\Users\\User\\Desktop\\panel\_enaho\\modulo\_1474\_2023.zip.
+2.  Descarga 912-Modulo1474.zip y lo guarda en "/path/to/your/directory/modulo_1474_2023.zip".
     
-3.  Lo descomprime en C:\\Users\\User\\Desktop\\panel\_enaho\\modulo\_1474\_2023\\.
+3.  Lo descomprime en "/path/to/your/directory/modulo_1474_2023".
     
 4.  Carga en memoria el primer .dta encontrado que supere los 5 MB.
     
@@ -184,7 +184,7 @@ enahodata, modulo("1474") año("2023") ///
 Si quieres **solo** descargar el ZIP (sin descomprimir ni cargar en memoria):
 ```
 enahodata, modulo("01") año("2022") ///
-    path("D:\proyecto_enaho") ///
+    path("/path/to/your/directory") ///
     replace
 ```
 **No** incluyes ni descomprimir ni load. De esa manera, el ZIP se mantendrá **intacto** en la carpeta destino.
@@ -197,7 +197,7 @@ Supón que deseas **módulos 01 y 02** para **2022 y 2023**. Sencillamente:
 enahodata, ///
     modulo("01 02") ///
     año("2022 2023") ///
-    path("C:\multi_enaho") ///
+    path("/path/to/your/directory") ///
     DEScomprimir load
 ```
 Generará todas las combinaciones (2022 - 01, 2022 - 02, 2023 - 01, 2023 - 02) y seguirá la misma lógica para cada par.
