@@ -206,6 +206,9 @@ Generará todas las combinaciones (2022 - 01, 2022 - 02, 2023 - 01, 2023 - 02) y
 
 El **programa** tiene internamente un umbral de 5 MB para **cargar** un .dta.Si deseas manejarlo de otra forma (por ejemplo, cargar **todos** los .dta o usar append), podrías modificar el bloque interno de load.
 
+Los datos se descargarán en formato zip. Es necesario crear una carpeta. 
+- Más información en el archivo de
+
 Licencia
 --------
 
@@ -213,7 +216,4 @@ Este repositorio está autorizado bajo la **licencia MIT**. Ver [LICENSE](https:
 
 **¡Listo!** Con este comando enahodata2, ya puedes automatizar la **descarga** y (opcional) **carga** de datos **ENAHO** (corte transversal o panel) dentro de **Stata**.
 
-## Notas
 
-Los datos se descargarán en formato zip. Es necesario crear una carpeta. 
-- Más información en el archivo de
