@@ -132,9 +132,7 @@ III. Ejemplo práctico
 **Ejemplo**: Descargar el **módulo 01** del **año 2023**, descomprimir y cargar el primer .dta encontrado (>5MB), en la carpeta C:\\Users\\User\\Desktop\\pruebas\\stata, sobrescribiendo si existiera:
 
 ```
-enahodata, modulo("01") año("2023") ///
-    path("/path/to/your/directory") ///
-    DEScomprimir load replace
+enahodata, modulo("01") año("2023") path("/path/to/your/directory") descomprimir load replace
 ```
 **Comportamiento**:
 
@@ -156,10 +154,7 @@ enahodata, modulo("01") año("2023") ///
 **Ejemplo**: Descargar el **módulo 1474** del **año 2023** (panel), descomprimir y cargar en memoria:
 
 ```
-enahodata, modulo("1474") año("2023") ///
-    panel ///
-    path("/path/to/your/directory") ///
-    DEScomprimir load replace
+enahodata, modulo("1474") año("2023") panel path("/path/to/your/directory") descomprimir load replace
 ```
 
 **Comportamiento**:
@@ -179,9 +174,7 @@ enahodata, modulo("1474") año("2023") ///
 
 Si quieres **solo** descargar el ZIP (sin descomprimir ni cargar en memoria):
 ```
-enahodata, modulo("01") año("2022") ///
-    path("/path/to/your/directory") ///
-    replace
+enahodata, modulo("01") año("2022") path("/path/to/your/directory") replace
 ```
 **No** incluyes ni descomprimir ni load. De esa manera, el ZIP se mantendrá **intacto** en la carpeta destino.
 
@@ -190,11 +183,7 @@ enahodata, modulo("01") año("2022") ///
 Supón que deseas **módulos 01 y 02** para **2022 y 2023**. Sencillamente:
 
 ```
-enahodata, ///
-    modulo("01 02") ///
-    año("2022 2023") ///
-    path("/path/to/your/directory") ///
-    DEScomprimir load
+enahodata, modulo("01 02") año("2022 2023") path("/path/to/your/directory") descomprimir load
 ```
 Generará todas las combinaciones (2022 - 01, 2022 - 02, 2023 - 01, 2023 - 02) y seguirá la misma lógica para cada par.
 
@@ -221,17 +210,6 @@ Si utilizas **ENAHODATA** en tu investigación o trabajo académico, por favor c
 Medrano M. (2025). *ENAHODATA (versión Stata)* [Software]. GitHub. [URL del repositorio](https://github.com/MaykolMedrano/enahodata)
 ```
 ---
-title: "ENAHODATA (versión Stata)"
-version: "1.0.0"
-authors:
-  - name: "Maykol Medrano"
-    orcid: ""
-date-released: "08-01-2025"
-repository-code: "https://github.com/MaykolMedrano/enahodata"
-license: "MIT"
-citation:
-  text: |
-    Medrano, M. (2025). ENAHODATA (versión Stata) [Software]. GitHub. https://github.com/MaykolMedrano/enahodata
----
+
 
 
