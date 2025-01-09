@@ -129,7 +129,7 @@ III. Ejemplo práctico
 
 ### 1) Descargar ENAHO Corte Transversal
 
-**Ejemplo**: Descargar el **módulo 01** del **año 2023**, descomprimir y cargar el primer .dta encontrado (>5MB), en la carpeta "/path/to/your/directory", sobrescribiendo si existiera:
+**Ejemplo**: Descargar el **módulo 01** del **año 2023**, descomprimir y cargar el primer .dta encontrado (>5MB), en la carpeta `/path/to/your/directory`, sobrescribiendo si existiera:
 
 ```
 enahodata, modulo("01") año("2023") path("/path/to/your/directory") descomprimir load replace
@@ -138,9 +138,9 @@ enahodata, modulo("01") año("2023") path("/path/to/your/directory") descomprimi
 
 1.  Baja el archivo 906-Modulo01.zip desde la URL oficial.
     
-2.  Lo almacena en "/path/to/your/directory/modulo_01_2023.zip".
+2.  Lo almacena en `/path/to/your/directory/modulo_01_2023.zip`.
     
-3.  Si se especificó descomprimir, crea la carpeta "/path/to/your/directory/modulo_01_2023" y extrae los .dta.
+3.  Si se especificó descomprimir, crea la carpeta `/path/to/your/directory/modulo_01_2023` y extrae los .dta.
     
 4.  Si se incluyó load, busca un .dta mayor a 5 MB y lo **carga en memoria**.
     
@@ -161,9 +161,9 @@ enahodata, modulo("1474") año("2023") panel path("/path/to/your/directory") des
 
 1.  Usa la tabla de códigos **panel** y detecta que 2023 corresponde a inei_code=912.
     
-2.  Descarga 912-Modulo1474.zip y lo guarda en "/path/to/your/directory/modulo_1474_2023.zip".
+2.  Descarga 912-Modulo1474.zip y lo guarda en `/path/to/your/directory/modulo_1474_2023.zip`.
     
-3.  Lo descomprime en "/path/to/your/directory/modulo_1474_2023".
+3.  Lo descomprime en `/path/to/your/directory/modulo_1474_2023`.
     
 4.  Carga en memoria el primer .dta encontrado que supere los 5 MB.
     
