@@ -191,6 +191,7 @@ Generará todas las combinaciones (2022 - 01, 2022 - 02, 2023 - 01, 2023 - 02) y
 
 Los datos se descargarán en formato zip. Es necesario crear una carpeta. 
 - Más información en el archivo de ayuda (help file)
+
 Usa Stata 18 para evitar errores en el uso del comando.
 
 
