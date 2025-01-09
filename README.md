@@ -61,18 +61,18 @@ Nro | Código Módulo | Módulo | Preguntas
 
 Nro | Año           | Código Módulo | Módulo
 :---|:-------------:|:------------:|:-----------------------------------------
-1|2023-2018|`1474`|Características de la Vivienda y del Hogar |[Preguntas] ()
-2|2023-2018|`1475`|Educación |[Preguntas] ()
-3|2023-2018|`1476`|Salud |[Preguntas] ()
-4|2023-2018|`1477`|Empleo e Ingresos |[Preguntas] ()
-5|2023-2018|`1478`|Sumarias ( Variables Calculadas ) |[Preguntas] ()
-6|2023-2018|`1479`|Características de los Miembros del Hogar |[Preguntas] ()
-7|2017-2011|`01`|Características de la Vivienda y del Hogar |[Preguntas] ()
-8|2017-2011|`03`|Educación |[Preguntas] ()
-9|2017-2011|`04`|Salud |[Preguntas] ()
-10|2017-2011|`05`|Empleo e Ingresos |[Preguntas] ()
-11|2017-2011|`34`|Sumarias( Variables calculadas ) |[Preguntas] ()
-12|2017-2011|`1314`|Características de los Miembros del Hogar |[Preguntas] ()
+1|2023-2018|`1474`|Características de la Vivienda y del Hogar|[Preguntas] ()
+2|2023-2018|`1475`|Educación|[Preguntas] ()
+3|2023-2018|`1476`|Salud|[Preguntas] ()
+4|2023-2018|`1477`|Empleo e Ingresos|[Preguntas] ()
+5|2023-2018|`1478`|Sumarias ( Variables Calculadas )|[Preguntas] ()
+6|2023-2018|`1479`|Características de los Miembros del Hogar|[Preguntas] ()
+7|2017-2011|`01`|Características de la Vivienda y del Hogar|[Preguntas] ()
+8|2017-2011|`03`|Educación|[Preguntas] ()
+9|2017-2011|`04`|Salud|[Preguntas] ()
+10|2017-2011|`05`|Empleo e Ingresos|[Preguntas] ()
+11|2017-2011|`34`|Sumarias( Variables calculadas )|[Preguntas] ()
+12|2017-2011|`1314`|Características de los Miembros del Hogar|[Preguntas] ()
 
 I. Instalación
 --------------
