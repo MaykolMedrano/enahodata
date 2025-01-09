@@ -129,7 +129,7 @@ III. Ejemplo práctico
 
 ### 1) Descargar ENAHO Corte Transversal
 
-**Ejemplo**: Descargar el **módulo 01** del **año 2023**, descomprimir y cargar el primer .dta encontrado (>5MB), en la carpeta C:\\Users\\User\\Desktop\\pruebas\\stata, sobrescribiendo si existiera:
+**Ejemplo**: Descargar el **módulo 01** del **año 2023**, descomprimir y cargar el primer .dta encontrado (>5MB), en la carpeta "/path/to/your/directory", sobrescribiendo si existiera:
 
 ```
 enahodata, modulo("01") año("2023") path("/path/to/your/directory") descomprimir load replace
@@ -138,9 +138,9 @@ enahodata, modulo("01") año("2023") path("/path/to/your/directory") descomprimi
 
 1.  Baja el archivo 906-Modulo01.zip desde la URL oficial.
     
-2.  Lo almacena en "/path/to/your/directory/modulo_01_2023.zip.
+2.  Lo almacena en "/path/to/your/directory/modulo_01_2023.zip".
     
-3.  Si se especificó descomprimir, crea la carpeta /path/to/your/directory/modulo_01_2023 y extrae los .dta.
+3.  Si se especificó descomprimir, crea la carpeta "/path/to/your/directory/modulo_01_2023" y extrae los .dta.
     
 4.  Si se incluyó load, busca un .dta mayor a 5 MB y lo **carga en memoria**.
     
@@ -202,7 +202,7 @@ Si utilizas **ENAHODATA** en tu investigación o trabajo académico, por favor c
 ### Formato APA
 
 ```plaintext
-Medrano M. (2025). *ENAHODATA (versión Stata)* [Software]. GitHub. (https://github.com/MaykolMedrano/enahodata)
+Medrano M. (2025). ENAHODATA (versión Stata) [Software]. GitHub. (https://github.com/MaykolMedrano/enahodata)
 ```
 ---
 
