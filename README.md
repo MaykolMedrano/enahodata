@@ -194,13 +194,8 @@ El **programa** tiene internamente un umbral de 5 MB para **cargar** un .dta.Si 
 Los datos se descargarán en formato zip. Es necesario crear una carpeta. 
 - Más información en el archivo de
 
-Licencia
---------
 
-Este repositorio está autorizado bajo la **licencia MIT**. Ver [LICENSE](https://chatgpt.com/c/LICENSE) para más detalles.
-
-
-## IV. Cómo Citar este Repositorio
+## 5). Cómo citar este repositorio
 
 Si utilizas **ENAHODATA** en tu investigación o trabajo académico, por favor considera citar este repositorio de la siguiente manera:
 
@@ -211,5 +206,9 @@ Medrano M. (2025). *ENAHODATA (versión Stata)* [Software]. GitHub. [URL del rep
 ```
 ---
 
+Licencia
+--------
+
+Este repositorio está autorizado bajo la **licencia MIT**. Ver [LICENSE](https://chatgpt.com/c/LICENSE) para más detalles.
 
 
