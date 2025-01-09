@@ -202,7 +202,7 @@ Si utilizas **ENAHODATA** en tu investigación o trabajo académico, por favor c
 ### Formato APA
 
 ```plaintext
-Medrano M. (2025). *ENAHODATA (versión Stata)* [Software]. GitHub. [URL del repositorio](https://github.com/MaykolMedrano/enahodata)
+Medrano M. (2025). *ENAHODATA (versión Stata)* [Software]. GitHub. (https://github.com/MaykolMedrano/enahodata)
 ```
 ---
 
