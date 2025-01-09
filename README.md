@@ -1,7 +1,7 @@
 enahodata (versión Stata)
 =========================
 
-Este **comando** de **Stata**, llamado enahodata2, permite **descargar** y (opcionalmente) **descomprimir** los datos de la **Encuesta Nacional de Hogares (ENAHO)**, la cual se realiza cada año desde 2004 en Perú. Además, incluye la **opción** para descargar **datos de panel** (ENAHO PANEL).
+Este **comando** de **Stata**, llamado enahodata, permite **descargar** y (opcionalmente) **descomprimir** los datos de la **Encuesta Nacional de Hogares (ENAHO)**, la cual se realiza cada año desde 2004 en Perú. Además, incluye la **opción** para descargar **datos de panel** (ENAHO PANEL).
 
 > **Ficha técnica**: [Consulta aquí](https://proyectos.inei.gob.pe/iinei/srienaho/Descarga/FichaTecnica/498-Ficha.pdf)
 
