@@ -187,12 +187,11 @@ enahodata, modulo("01 02") año("2022 2023") path("/path/to/your/directory") des
 ```
 Generará todas las combinaciones (2022 - 01, 2022 - 02, 2023 - 01, 2023 - 02) y seguirá la misma lógica para cada par.
 
-### Nota sobre archivos .dta
-
-El **programa** tiene internamente un umbral de 5 MB para **cargar** un .dta.Si deseas manejarlo de otra forma (por ejemplo, cargar **todos** los .dta o usar append), podrías modificar el bloque interno de load.
+### Notas
 
 Los datos se descargarán en formato zip. Es necesario crear una carpeta. 
-- Más información en el archivo de
+- Más información en el archivo de ayuda (help file)
+Usa Stata 18 para evitar errores en el uso del comando.
 
 
 ## 5). Cómo citar este repositorio
