@@ -74,7 +74,7 @@ Nro | Año           | Código Módulo* | Módulo
 11|2017-2011|`34`|Sumarias( Variables calculadas )|[Preguntas] ()
 12|2017-2011|`1314`|Características de los Miembros del Hogar|[Preguntas] ()
 
-*Tomar en cuenta que para información de datos de panel los códigos de los modulos difieren a partir del año 2018 en adelante. 
+*/ Tomar en cuenta que para información de datos de panel los códigos de los modulos difieren a partir del año 2018 en adelante. 
 I. Instalación
 --------------
 Copie el siguiente codigo en Stata y ejecute.
