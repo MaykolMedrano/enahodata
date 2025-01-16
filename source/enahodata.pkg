@@ -1,15 +1,16 @@
-v 1
+v 2
 
-d enahodata. Import National Household Survey on Living Conditions and Poverty data from INEI - Perú
+d enahodata. Automatiza la descarga de información de la Encuesta Nacional de Hogares (ENAHO) que realiza el Instituto Nacional de Estadística e Informática del Perú.
 d
 d Author: Maykol Medrano.
 d
 d KW: data
 d KW: enaho
 d KW: inei
+d KW: perú
 d
-d Requires: Stata version 15 and Windows 10
+d Requires: Stata version 18 and Windows 10
 d
-d Distribution-Date: 2020
+d Distribution-Date: 2025
 f enahodata.ado
 f enahodata.sthlp
