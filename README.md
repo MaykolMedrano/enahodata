@@ -108,7 +108,7 @@ enahodata,                ///
 
 ### Parámetros:
 
-*   **modulo(string)**: lista de **códigos** de módulo (por ejemplo, "01 02 03").
+*   **MODulo(string)**: lista de **códigos** de módulo (por ejemplo, "01 02 03").
     
 *   **año(string)**: lista de **años** (por ejemplo, "2022 2023").
     
@@ -116,7 +116,7 @@ enahodata,                ///
     
 *   **path(string)**: ruta de la carpeta de destino para guardar los ZIP y/o descomprimir.
     
-*   **descomprimir**: si se incluye, se descomprime el ZIP.
+*   **DEScomprimir**: si se incluye, se descomprime el ZIP.
     
 *   **PREServe**: (opcional) para guardar el estado actual de la data.
     
