@@ -80,7 +80,7 @@ I. Instalación
 --------------
 Copie el siguiente codigo en Stata y ejecute.
 ```
-* Install enahodata (remove program if it existed previously)
+*Install enahodata (remove program if it existed previously)
 cap ado uninstall enahodata 
 net install enahodata, from(https://github.com/MaykolMedrano/enahodata/raw/master/source/)
 ```
