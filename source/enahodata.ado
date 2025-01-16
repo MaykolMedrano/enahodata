@@ -1,139 +1,326 @@
 *! enahodata: 
-*! Version 2.3.2: 2024/09/19
+*! Version 0.0.2: 2025/01/09
 *! Author: Maykol Medrano
 *! Institute of Economics
 *! UC
-*! maykolmedrano35@gmail.com
+*! mmedrano2@uc.cl
 
+capture program drop enahodata2
+program define enahodata2
+    version 16.0
+    set more off
 
-capture program drop enahodata
-program define enahodata
-	vers 15.0
-	set more off
-	
-	
-syntax name(id="inei" name=place), 	              ///
-						modulo(string)		  	  ///
-						año(string)               ///
-								 	              ///
-						[						  ///
-								year(numlist) 	  ///
-								PREServe		  ///
-								condition(string) ///
-						]
+    /***********************************************************
+      1. Definición de sintaxis
+    ***********************************************************/
+    syntax , 					///
+        MODulo(string) 			///
+        año(string)    			///
+        [ 						///
+		  panel					///
+          path(string)        	///
+          DEScomprimir        	///
+          PREServe            	///
+          condition(string)   	///
+          replace             	///
+          load                	///
+        ]
 
-if length("`preserve'") != 0 {
-		tempfile init
-		cap save `init', replace
-}
+    /***********************************************************
+      2. Guardar estado si se solicita la opción PREServe
+    ***********************************************************/
+    if length("`preserve'") != 0 {
+        tempfile init
+        cap save `init', replace
+    }
 
-clear
+    clear
 
+    /***********************************************************
+      3. Guardar local para `path'
+         - Se elimina la lógica de 'place' porque ya no se usa.
+    ***********************************************************/
+    if length("`path'") == 0 {
+        loc path "."
+    }
 
-if length(`"`place'"') != 0 {
-		local place `place'
+    /***********************************************************
+      4. Preparar listas de módulos y años
+    ***********************************************************/
+    loc yearlist "`año'"
+    loc modlist  "`modulo'"
 
-}
+    /***********************************************************
+      4a. Chequeamos si se pidió la opción `load`
+    ***********************************************************/
+    loc do_load = 0
+    if "`load'" != "" {
+        loc do_load = 1
+    }
 
-if length(`"`modulo'"') != 0 {
-		local id_modulo `id_modulo'
-}		
+	/***********************************************************
+      4b. Chequeamos si se pidió la opción `panel'
+          Si se especifica panel => do_panel = 1
+          Caso contrario => do_panel = 0
+    ***********************************************************/
+    loc do_panel = 0
+    if "`panel'" != "" {
+        loc do_panel = 1
+    }
 
-********************************************************************************
-*** CODIGO DE ESCUESTA POR AÑO
-********************************************************************************
-	//Intercambiamos el codigo por el año de encuesta
+    /***********************************************************
+      5. Bucle por año
+    ***********************************************************/
+    foreach y of loc yearlist {
+		/*******************************************************
+         5a. Si es ENAHO PANEL (do_panel=1)
+        *******************************************************/
+        if `do_panel' == 1 {
+            if "`y'"=="2023" {
+                loc inei_code 912
+                loc year_lab 2023
+            }
+            else if "`y'"=="2022" {
+                loc inei_code 845
+                loc year_lab 2022
+            }
+            else if "`y'"=="2021" {
+                loc inei_code 763
+                loc year_lab 2021
+            }
+            else if "`y'"=="2020" {
+                loc inei_code 743
+                loc year_lab 2020
+            }
+            else if "`y'"=="2019" {
+                loc inei_code 699
+                loc year_lab 2019
+            }
+            else if "`y'"=="2018" {
+                loc inei_code 651
+                loc year_lab 2018
+            }
+            else if "`y'"=="2017" {
+                loc inei_code 612
+                loc year_lab 2017
+            }
+            else if "`y'"=="2016" {
+                loc inei_code 614
+                loc year_lab 2016
+            }
+            else if "`y'"=="2015" {
+                loc inei_code 529
+                loc year_lab 2015
+            }
+            else if "`y'"=="2011" {
+                loc inei_code 302
+                loc year_lab 2011
+            }
+            else {
+                di as error "El año panel `y' no está contemplado."
+                continue
+            }
+        }
+		
+        /*******************************************************
+         5b. Si es ENAHO regular (do_panel=0)
+        *******************************************************/
+        else {
+            if "`y'"=="2023" {
+                loc inei_code 906
+                loc year_lab 2023
+            }
+            else if "`y'"=="2022" {
+                loc inei_code 784
+                loc year_lab 2022
+            }
+            else if "`y'"=="2021" {
+                loc inei_code 759
+                loc year_lab 2021
+            }
+            else if "`y'"=="2020" {
+                loc inei_code 737
+                loc year_lab 2020
+            }
+            else if "`y'"=="2019" {
+                loc inei_code 687
+                loc year_lab 2019
+            }
+            else if "`y'"=="2018" {
+                loc inei_code 634
+                loc year_lab 2018
+            }
+            else if "`y'"=="2017" {
+                loc inei_code 603
+                loc year_lab 2017
+            }
+            else if "`y'"=="2016" {
+                loc inei_code 546
+                loc year_lab 2016
+            }
+            else if "`y'"=="2015" {
+                loc inei_code 498
+                loc year_lab 2015
+            }
+            else if "`y'"=="2014" {
+                loc inei_code 440
+                loc year_lab 2014
+            }
+            else if "`y'"=="2013" {
+                loc inei_code 404
+                loc year_lab 2013
+            }
+            else if "`y'"=="2012" {
+                loc inei_code 324
+                loc year_lab 2012
+            }
+            else if "`y'"=="2011" {
+                loc inei_code 291
+                loc year_lab 2011
+            }
+            else if "`y'"=="2010" {
+                loc inei_code 279
+                loc year_lab 2010
+            }
+            else if "`y'"=="2009" {
+                loc inei_code 285
+                loc year_lab 2009
+            }
+            else if "`y'"=="2008" {
+                loc inei_code 284
+                loc year_lab 2008
+            }
+            else if "`y'"=="2007" {
+                loc inei_code 283
+                loc year_lab 2007
+            }
+            else if "`y'"=="2006" {
+                loc inei_code 282
+                loc year_lab 2006
+            }
+            else if "`y'"=="2005" {
+                loc inei_code 281
+                loc year_lab 2005
+            }
+            else if "`y'"=="2004" {
+                loc inei_code 280
+                loc year_lab 2004
+            }
+            else {
+                di as error "El año `y' no está contemplado en el programa ENAHO regular."
+                continue
+            }
+        }
+        /***********************************************************
+          6. Bucle por módulo
+        ***********************************************************/
+		loc baseurl "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/STATA"
+		
+        foreach m of loc modlist {
+            di in green "Importando Módulo `m', año `y'"
 
+            * Construimos el nombre del ZIP en la carpeta de destino
+            loc outzip "`path'\modulo_`m'_`year_lab'.zip"
 
-	if "`año'"=="2023" {
-		local año 906
-		local year 2023
-	}
-	else if "`año'"=="2022" {
-		local año 784
-		local year 2022
-	}
-	else if "`año'"=="2021" {
-		local año 759
-		local year 2021
-	}
-	else if "`año'"=="2020" {
-		local año 737
-		local year 2020
-	}
-	else if "`año'"=="2019" {
-		local año 687
-		local year 2019
-	}
-	else if "`año'"=="2018" {
-		local año 634
-		local year 2018
-	}
-	else if "`año'"=="2017" {
-		local año 603
-		local year 2017
-	}
-	else if "`año'"=="2016" {
-		local año 546
-		local year 2016
-	}
-	else if "`año'"=="2015" {
-		local año 498
-		local year 2015
-	}
-	else if "`año'"=="2014" {
-		local año 440
-		local year 2014	
-	}	
-	else if "`año'"=="2013" {
-		local año 404
-		local year 2013
-	}
-	else if "`año'"=="2012" {
-		local año 324
-		local year 2012
-	}
-	else if "`año'"=="2011" {
-		local año 291
-		local year 2011
-	}
-	else if "`año'"=="2010" {
-		local año 279
-		local year 2010
-	}
-	else if "`año'"=="2009" {
-		local año 285
-		local year 2009
-	}
-	else if "`año'"=="2008" {
-		local año 284
-		local year 2008
-	}
-	else if "`año'"=="2007" {
-		local año 283
-		local year 2007
-	}
-	else if "`año'"=="2006" {
-		local año 282
-		local year 2006
-	}
-	else if "`año'"=="2005" {
-		local año 281
-		local year 2005
-	}
-	else if "`año'"=="2004" {
-		local año 280
-		local year 2004
-	}
-	
-********************************************************************************
-*** Remplazamos los valores de sintaxis
-********************************************************************************
-	//Usamos el comando nativo copy para descargar los datos
-di in green "Importing modulo_`modulo'_`año' from {browse www.inei.gob.pe/bases-de-datos:INEI database.}"	
-copy "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/STATA/`año'-Modulo`modulo'.zip"  modulo_`modulo'_`year'.zip
-	di in green "Descarga exitosa"
-	di in green "Consulte por más datos aquí:{browse www.inei.gob.pe:www.inei.gob.pe}"
-	
+            * Definir opciones para el comando copy
+            loc copyopts
+            if "`replace'" != "" {
+                loc copyopts ", replace"
+            }
+
+            copy "`baseurl'/`inei_code'-Modulo`m'.zip" ///
+                 "`outzip'" `copyopts'
+
+            di in green "Descarga exitosa: `outzip'"
+
+            /***********************************************************
+              7. Descomprimir si el usuario pide la opción `descomprimir`
+            ***********************************************************/
+            if "`descomprimir'" != "" {
+                di in green "Iniciando proceso de descompresión..."
+
+                * Guardamos el directorio actual
+                qui pwd
+                loc olddir = r(pwd)
+
+                * Creamos una sola carpeta 
+                cap mkdir "`path'\modulo_`m'_`year_lab'"
+                loc subcarp "`path'\modulo_`m'_`year_lab'"
+
+                * Nos movemos a ella
+                qui cd "`subcarp'"
+                sleep 3500
+
+                * Descomprimimos (solo .dta), respetando estructura interna
+                qui cap unzipfile "`outzip'", replace ifilter(".*\.dta$")
+
+                * Regresamos al directorio anterior
+                qui cd "`olddir'"
+
+                /***********************************************************
+                  8. Si se pidió `load`, buscamos y cargamos el .dta
+                     (solo si existe y > 5 MB)
+                ***********************************************************/
+                if `do_load' == 1 {
+                    * Entramos a la carpeta interna 
+                    qui cd "`subcarp'/`inei_code'-Modulo`m'"
+
+                    * Encoding
+                    loc files : dir . files "*.dta"
+                    foreach f of loc files {
+                        clear all
+                        qui unicode analyze "`f'"
+                        qui unicode encoding set "latin1"
+                        qui unicode translate "`f'"
+                    }
+
+                    *di in green "Buscando archivos .dta en: `subcarp'"
+					sleep 1000
+                    * 1) Hacer lista de archivos .dta
+                    local dtafiles : dir "" files "*.dta"
+
+                    * 2) Umbral de 5 MB = 5*1024*1024
+                    loc threshold = 5242880
+                    loc found     = 0
+
+                    * 3) Recorrer la lista
+                    foreach file of loc dtafiles {
+                        cap file open myFile using "`file'", read
+                        if _rc == 0 {
+                            loc size = r(filelen)
+                            file close myFile
+
+                            if `size' > `threshold' {
+                                *di as green "Cargando archivo: `file'"
+                                *di as green "Tamaño aproximado: " %9.2f =(`size'/1024/1024) " MB"
+
+                                qui use "`file'", clear
+
+                                if length("`condition'") != 0 {
+                                    di as green "Aplicando filtro: `condition'"
+                                    qui keep if `condition'
+                                }
+
+                                loc found = 1
+                                break
+                            }
+                        }
+                    }
+
+                    * 4) Si no se encontró .dta > 5 MB
+                    if `found' == 0 {
+                        di as error "No se encontró ningún .dta mayor a 5 MB."
+                    }
+
+                    * Borramos el zip tras descomprimir y cargar
+                    erase "`outzip'"
+                }
+
+                * Volvemos al directorio anterior
+                qui cd "`olddir'"
+            }
+
+        }
+    }
 end
 
