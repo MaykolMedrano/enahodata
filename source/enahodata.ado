@@ -1,12 +1,12 @@
-*! endesdata: 
+*! enahodata: 
 *! Version 0.0.1: 2025/01/21
 *! Author: Maykol Medrano
 *! Institute of Economics
 *! UC
 *! mmedrano2@uc.cl
 
-capture program drop endesdata
-program define endesdata
+capture program drop enahodata
+program define enahodata
     version 16.0
     set more off
 
