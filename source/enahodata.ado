@@ -248,7 +248,7 @@ program define enahodata
                 cap mkdir "`subtemp'"
 
                 * 1) Descomprimir SÓLO los .dta en la carpeta temporal
-                qui unzipfile "`outzip'", replace ifilter(".*\.dta$") directory("`subtemp'")
+                qui cap unzipfile "`outzip'", replace ifilter(".*\.dta$") 
                 sleep 1000
 
                 * 2) Mover (o copiar) todos los .dta a la carpeta final (aplanado)
