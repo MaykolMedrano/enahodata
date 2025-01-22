@@ -261,7 +261,7 @@ program define enahodata
                 erase "`outzip'"
 
                 * 4) Eliminar la carpeta temporal
-                capture rmdir "`subtemp'", all
+                capture rmdir "`subtemp'"
 
                 /***********************************************************
                   8. Si se pidió `load`, buscamos y cargamos el .dta
