@@ -252,7 +252,7 @@ program define enahodata
                 sleep 1000
 
                 * 2) Mover (o copiar) todos los .dta a la carpeta final (aplanado)
-                local dtalist : dir "`subtemp'" files "*.dta", all
+                local dtalist : dir "`subtemp'" files "*.dta"
                 foreach f of local dtalist {
                     copy "`subtemp'/`f'" "`subcarp'/`f'", replace
                 }
