@@ -1,5 +1,5 @@
 *! enahodata: 
-*! Version 0.0.1: 2025/01/21
+*! Version 0.0.1: 2025/01/22
 *! Author: Maykol Medrano
 *! Institute of Economics
 *! UC
@@ -220,7 +220,7 @@ program define enahodata
             di in green "Importando Módulo `m', año `y'"
 
             * Construimos el nombre del ZIP en la carpeta de destino
-            loc outzip "`path'\unzip_modulo_`m'_`year_lab'.zip"
+            loc outzip "`path'\modulo_`m'_`year_lab'.zip"
 
             * Definir opciones para el comando copy
             loc copyopts
@@ -240,37 +240,35 @@ program define enahodata
                 di in green "Iniciando proceso de descompresión..."
 
                 * Creamos la carpeta final donde queremos los .dta (aplanado)
-                cap mkdir "`path'\modulo_`m'_`year_lab'"
-                loc subcarp "`path'\modulo_`m'_`year_lab'"
-
-                * Creamos también una carpeta temporal para descomprimir
-                loc subtemp "`"`path'\temp_`m'_`year_lab'"
-        
-                * 1) Descomprimir SÓLO los .dta en la carpeta temporal
+                cap mkdir  "`path'\modulo_`m'_`year_lab'"
+                loc ffiles "`path'\modulo_`m'_`year_lab'"
+		
+                * 1) Descomprimir sólo los .dta en la carpeta temporal
                 qui cap unzipfile "`outzip'", replace ifilter(".*\.dta$") 
-                sleep 1000
+                sleep 1500
 
                 * 2) Mover (o copiar) todos los .dta a la carpeta final (aplanado)
-                local dtalist : dir "`outzip'" files "*.dta"
+				qui cd "`path'/`inei_code'-Modulo`m'"
+                local dtalist : dir . files "*.dta"
                 foreach f of local dtalist {
-                    copy "`outzip'/`f'" "`subcarp'/`f'", replace
+                    copy "`f'" "`ffiles'/`f'", replace
+						sleep 100
+					erase "`f'"
                 }
 
                 * 3) Borrar el .zip (ya no lo necesitamos)
-                erase "`outzip'"
-
-                * 4) Eliminar la carpeta temporal
-                capture rmdir "`subtemp'"
+				qui cd "`path'"
+                erase  "`outzip'"
+				cap rmdir "`inei_code'-Modulo`m'"
 
                 /***********************************************************
                   8. Si se pidió `load`, buscamos y cargamos el .dta
-                     (sólo si existe y > 5 MB)
                 ***********************************************************/
                 if `do_load' == 1 {
                     * Nos movemos a la carpeta final (ya aplanada)
-                    qui cd "`subcarp'"
+                    qui cd "`ffiles'"
 
-                    * Encoding: convertir cada .dta a unicode-latin1 (opcional)
+					* Encoding: convertir cada .dta a unicode-latin1 
                     loc files : dir . files "*.dta"
                     foreach f of loc files {
                         clear all
@@ -278,40 +276,29 @@ program define enahodata
                         qui unicode encoding set "latin1"
                         qui unicode translate "`f'"
                     }
-
-                    * 1) Lista de archivos .dta
+					
+                    * Lista de archivos .dta
                     local dtafiles : dir "." files "*.dta"
-                    
-                    * 2) Umbral de 5 MB = 5*1024*1024
-                    loc threshold = 5242880
-                    loc found     = 0
 
-                    * 3) Recorrer la lista y cargar el primer .dta > 5 MB
-                    foreach file of loc dtafiles {
-                        cap file open myFile using "`file'", read
-                        if _rc == 0 {
-                            loc size = r(filelen)
-                            file close myFile
+                    * Cargar el primer archivo .dta que se encuentre
+                    local found = 0
+                    foreach file of local dtafiles {
+                        qui use "`file'", clear
 
-                            if `size' > `threshold' {
-                                qui use "`file'", clear
-
-                                if length("`condition'") != 0 {
-                                    di as green "Aplicando filtro: `condition'"
-                                    qui keep if `condition'
-                                }
-
-                                loc found = 1
-                                di as green "Archivo .dta cargado: `file'"
-                                di as green "Tamaño aproximado: " %9.2f =(`size'/1024/1024) " MB"
-                                exit
-                            }
+                        * Aplicar la condición si se especificó
+                        if length("`condition'") != 0 {
+                            di as green "Aplicando filtro: `condition'"
+                            qui keep if `condition'
                         }
+
+                        loc found = 1
+                        *di as green "Archivo .dta cargado: `file'"
+                        exit
                     }
 
-                    * 4) Si no se encontró .dta > 5 MB
+                    * Si no se encontró ningún archivo .dta
                     if `found' == 0 {
-                        di as error "No se encontró ningún .dta mayor a 5 MB."
+                        di as error "No se encontró ningún archivo .dta para cargar."
                     }
                 }
             }
