@@ -1,29 +1,29 @@
-*! enahodata: 
-*! Version 0.0.2: 2025/01/09
+*! endesdata: 
+*! Version 0.0.1: 2025/01/21
 *! Author: Maykol Medrano
 *! Institute of Economics
 *! UC
 *! mmedrano2@uc.cl
 
-capture program drop enahodata2
-program define enahodata2
+capture program drop endesdata
+program define endesdata
     version 16.0
     set more off
 
     /***********************************************************
       1. Definición de sintaxis
     ***********************************************************/
-    syntax , 					///
-        MODulo(string) 			///
-        año(string)    			///
-        [ 						///
-		  panel					///
-          path(string)        	///
-          DEScomprimir        	///
-          PREServe            	///
-          condition(string)   	///
-          replace             	///
-          load                	///
+    syntax ,                    ///
+        MODulo(string)          ///
+        año(string)             ///
+        [                       ///
+          panel                 ///
+          path(string)          ///
+          DEScomprimir          ///
+          PREServe              ///
+          condition(string)     ///
+          replace               ///
+          load                  ///
         ]
 
     /***********************************************************
@@ -58,7 +58,7 @@ program define enahodata2
         loc do_load = 1
     }
 
-	/***********************************************************
+    /***********************************************************
       4b. Chequeamos si se pidió la opción `panel'
           Si se especifica panel => do_panel = 1
           Caso contrario => do_panel = 0
@@ -72,7 +72,7 @@ program define enahodata2
       5. Bucle por año
     ***********************************************************/
     foreach y of loc yearlist {
-		/*******************************************************
+        /*******************************************************
          5a. Si es ENAHO PANEL (do_panel=1)
         *******************************************************/
         if `do_panel' == 1 {
@@ -121,7 +121,6 @@ program define enahodata2
                 continue
             }
         }
-		
         /*******************************************************
          5b. Si es ENAHO regular (do_panel=0)
         *******************************************************/
@@ -211,10 +210,11 @@ program define enahodata2
                 continue
             }
         }
+
         /***********************************************************
           6. Bucle por módulo
         ***********************************************************/
-		loc baseurl "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/STATA"
+        loc baseurl "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/STATA"
 		
         foreach m of loc modlist {
             di in green "Importando Módulo `m', año `y'"
@@ -239,33 +239,39 @@ program define enahodata2
             if "`descomprimir'" != "" {
                 di in green "Iniciando proceso de descompresión..."
 
-                * Guardamos el directorio actual
-                qui pwd
-                loc olddir = r(pwd)
-
-                * Creamos una sola carpeta 
+                * Creamos la carpeta final donde queremos los .dta (aplanado)
                 cap mkdir "`path'\modulo_`m'_`year_lab'"
                 loc subcarp "`path'\modulo_`m'_`year_lab'"
 
-                * Nos movemos a ella
-                qui cd "`subcarp'"
-                sleep 3500
+                * Creamos también una carpeta temporal para descomprimir
+                loc subtemp "`path'\temp_unzip_`m'_`year_lab'"
+                cap mkdir "`subtemp'"
 
-                * Descomprimimos (solo .dta), respetando estructura interna
-                qui cap unzipfile "`outzip'", replace ifilter(".*\.dta$")
+                * 1) Descomprimir SÓLO los .dta en la carpeta temporal
+                qui unzipfile "`outzip'", replace ifilter(".*\.dta$") directory("`subtemp'")
+                sleep 1000
 
-                * Regresamos al directorio anterior
-                qui cd "`olddir'"
+                * 2) Mover (o copiar) todos los .dta a la carpeta final (aplanado)
+                local dtalist : dir "`subtemp'" files "*.dta", all
+                foreach f of local dtalist {
+                    copy "`subtemp'/`f'" "`subcarp'/`f'", replace
+                }
+
+                * 3) Borrar el .zip (ya no lo necesitamos)
+                erase "`outzip'"
+
+                * 4) Eliminar la carpeta temporal
+                capture rmdir "`subtemp'", all
 
                 /***********************************************************
                   8. Si se pidió `load`, buscamos y cargamos el .dta
-                     (solo si existe y > 5 MB)
+                     (sólo si existe y > 5 MB)
                 ***********************************************************/
                 if `do_load' == 1 {
-                    * Entramos a la carpeta interna 
-                    qui cd "`subcarp'/`inei_code'-Modulo`m'"
+                    * Nos movemos a la carpeta final (ya aplanada)
+                    qui cd "`subcarp'"
 
-                    * Encoding
+                    * Encoding: convertir cada .dta a unicode-latin1 (opcional)
                     loc files : dir . files "*.dta"
                     foreach f of loc files {
                         clear all
@@ -274,16 +280,14 @@ program define enahodata2
                         qui unicode translate "`f'"
                     }
 
-                    *di in green "Buscando archivos .dta en: `subcarp'"
-					sleep 1000
-                    * 1) Hacer lista de archivos .dta
-                    local dtafiles : dir "" files "*.dta"
-
+                    * 1) Lista de archivos .dta
+                    local dtafiles : dir "." files "*.dta"
+                    
                     * 2) Umbral de 5 MB = 5*1024*1024
                     loc threshold = 5242880
                     loc found     = 0
 
-                    * 3) Recorrer la lista
+                    * 3) Recorrer la lista y cargar el primer .dta > 5 MB
                     foreach file of loc dtafiles {
                         cap file open myFile using "`file'", read
                         if _rc == 0 {
@@ -291,9 +295,6 @@ program define enahodata2
                             file close myFile
 
                             if `size' > `threshold' {
-                                *di as green "Cargando archivo: `file'"
-                                *di as green "Tamaño aproximado: " %9.2f =(`size'/1024/1024) " MB"
-
                                 qui use "`file'", clear
 
                                 if length("`condition'") != 0 {
@@ -302,7 +303,9 @@ program define enahodata2
                                 }
 
                                 loc found = 1
-                                break
+                                di as green "Archivo .dta cargado: `file'"
+                                di as green "Tamaño aproximado: " %9.2f =(`size'/1024/1024) " MB"
+                                exit
                             }
                         }
                     }
@@ -311,16 +314,8 @@ program define enahodata2
                     if `found' == 0 {
                         di as error "No se encontró ningún .dta mayor a 5 MB."
                     }
-
-                    * Borramos el zip tras descomprimir y cargar
-                    erase "`outzip'"
                 }
-
-                * Volvemos al directorio anterior
-                qui cd "`olddir'"
             }
-
         }
     }
 end
-
