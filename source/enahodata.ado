@@ -220,7 +220,7 @@ program define enahodata
             di in green "Importando Módulo `m', año `y'"
 
             * Construimos el nombre del ZIP en la carpeta de destino
-            loc outzip "`path'\modulo_`m'_`year_lab'.zip"
+            loc outzip "`path'\unzip_modulo_`m'_`year_lab'.zip"
 
             * Definir opciones para el comando copy
             loc copyopts
@@ -251,9 +251,9 @@ program define enahodata
                 sleep 1000
 
                 * 2) Mover (o copiar) todos los .dta a la carpeta final (aplanado)
-                local dtalist : dir "`subtemp'" files "*.dta"
+                local dtalist : dir "`outzip'" files "*.dta"
                 foreach f of local dtalist {
-                    copy "`subtemp'/`f'" "`subcarp'/`f'", replace
+                    copy "`outzip'/`f'" "`subcarp'/`f'", replace
                 }
 
                 * 3) Borrar el .zip (ya no lo necesitamos)
