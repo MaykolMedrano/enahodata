@@ -244,9 +244,8 @@ program define enahodata
                 loc subcarp "`path'\modulo_`m'_`year_lab'"
 
                 * Creamos también una carpeta temporal para descomprimir
-                loc subtemp "`path'\temp_unzip_`m'_`year_lab'"
-                cap mkdir "`subtemp'"
-
+                loc subtemp "`"`path'\modulo_`m'_`year_lab'"
+        
                 * 1) Descomprimir SÓLO los .dta en la carpeta temporal
                 qui cap unzipfile "`outzip'", replace ifilter(".*\.dta$") 
                 sleep 1000
