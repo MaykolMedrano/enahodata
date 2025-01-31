@@ -244,15 +244,15 @@ program define enahodata
                 di in green "Iniciando proceso de descompresión..."
 
                 * Creamos la carpeta final donde queremos los .dta (aplanado)
-                cap mkdir  "`path'\modulo_`m'_`year_lab'"
-                loc ffiles "`path'\modulo_`m'_`year_lab'"
+                cap mkdir  "`path'\modulo_`m'_`year_lab_'"
+                loc ffiles "`path'\modulo_`m'_`year_lab_'"
 		
                 * 1) Descomprimir sólo los .dta en la carpeta temporal
                 qui cap unzipfile "`outzip'", replace ifilter(".*\.dta$") 
                 sleep 1500
 
                 * 2) Mover (o copiar) todos los .dta a la carpeta final (aplanado)
-				qui cd "`path'/`inei_code'-Modulo`m'"
+				qui cd "`path'/`inei_code'-Modulo`m'_"
                 local dtalist : dir . files "*.dta"
                 foreach f of local dtalist {
                     copy "`f'" "`ffiles'/`f'", replace
@@ -263,7 +263,7 @@ program define enahodata
                 * 3) Borrar el .zip (ya no lo necesitamos)
 				qui cd "`path'"
                 erase  "`outzip'"
-				cap rmdir "`inei_code'-Modulo`m'"
+		cap rmdir "`inei_code'-Modulo`m'_"
 		* Regresamos a la carpeta anterior
                 cd "`olddir'"
 
