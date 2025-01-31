@@ -239,6 +239,10 @@ program define enahodata
             if "`descomprimir'" != "" {
                 di in green "Iniciando proceso de descompresión..."
 
+		* Guardamos el directorio actual
+                quietly pwd
+                local olddir = r(pwd)
+
                 * Creamos la carpeta final donde queremos los .dta (aplanado)
                 cap mkdir  "`path'\modulo_`m'_`year_lab'"
                 loc ffiles "`path'\modulo_`m'_`year_lab'"
@@ -260,6 +264,8 @@ program define enahodata
 				qui cd "`path'"
                 erase  "`outzip'"
 				cap rmdir "`inei_code'-Modulo`m'"
+		* Regresamos a la carpeta anterior
+                cd "`olddir'"
 
                 /***********************************************************
                   8. Si se pidió `load`, buscamos y cargamos el .dta
