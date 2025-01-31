@@ -38,7 +38,6 @@ program define enahodata
 
     /***********************************************************
       3. Guardar local para `path'
-         - Se elimina la lógica de 'place' porque ya no se usa.
     ***********************************************************/
     if length("`path'") == 0 {
         loc path "."
@@ -214,13 +213,18 @@ program define enahodata
         /***********************************************************
           6. Bucle por módulo
         ***********************************************************/
+
+	* Guardamos el directorio actual
+        quietly pwd
+        local olddir = r(pwd)
+
         loc baseurl "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/STATA"
 		
         foreach m of loc modlist {
             di in green "Importando Módulo `m', año `y'"
 
             * Construimos el nombre del ZIP en la carpeta de destino
-            loc outzip "`path'\modulo_`m'_`year_lab'.zip"
+            loc outzip "`path'/modulo_`m'_`year_lab'.zip"
 
             * Definir opciones para el comando copy
             loc copyopts
@@ -238,10 +242,6 @@ program define enahodata
             ***********************************************************/
             if "`descomprimir'" != "" {
                 di in green "Iniciando proceso de descompresión..."
-
-		* Guardamos el directorio actual
-                quietly pwd
-                local olddir = r(pwd)
 
                 * Creamos la carpeta final donde queremos los .dta (aplanado)
                 cap mkdir  "`path'\modulo_`m'_`year_lab'"
@@ -274,7 +274,7 @@ program define enahodata
                     * Nos movemos a la carpeta final (ya aplanada)
                     qui cd "`ffiles'"
 
-					* Encoding: convertir cada .dta a unicode-latin1 
+		* Encoding: convertir cada .dta a unicode-latin1 
                     loc files : dir . files "*.dta"
                     foreach f of loc files {
                         clear all
