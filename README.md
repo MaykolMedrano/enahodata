@@ -1,7 +1,3 @@
-[![Contributors][contributors-shield]][contributors-url]
-[![License][license-shield]][license-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Forks][forks-shield]][forks-url]
 
 enahodata (versión Stata)
 =========================
