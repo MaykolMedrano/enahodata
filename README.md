@@ -125,7 +125,7 @@ enahodata,                ///
     
 *   **replace**: si se incluye, sobrescribe archivos existentes.
     
-*   **load**: si se incluye, busca y **carga** en memoria un .dta mayor a 5 MB (según la lógica interna).
+*   **load**: si se incluye, busca y **carga** en memoria, adicionalmente realiza el enconding respectivo para reconocer caracteres especiales.
     
 
 III. Ejemplo práctico
