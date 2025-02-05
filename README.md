@@ -85,7 +85,7 @@ Copie el siguiente codigo en Stata y ejecute.
 cap ado uninstall enahodata 
 net install enahodata, from(https://github.com/MaykolMedrano/enahodata/raw/master/source/)
 ```
-
+**Advertencia importante:** Este comando está diseñado para funcionar exclusivamente en **Windows**. Además, es esencial que el usuario tenga **WinRAR** instalado en su computadora. Si WinRAR no está instalado, el comando no funcionará correctamente y se presentarán errores en la ejecución. Asegúrese de tener WinRAR instalado antes de ejecutar este código para evitar problemas.
 
 II. Descripción del comando
 ---------------------------
