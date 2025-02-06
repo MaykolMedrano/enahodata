@@ -1,5 +1,5 @@
 *! enahodata: 
-*! Version 0.0.1: 2025/01/22
+*! Version 0.0.21: 2025/02/06
 *! Author: Maykol Medrano
 *! Institute of Economics
 *! UC
@@ -214,24 +214,26 @@ program define enahodata
           6. Bucle por módulo
         ***********************************************************/
 
-	* Guardamos el directorio actual
-        quietly pwd
-        local olddir = r(pwd)
-
-        loc baseurl "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/STATA"
+			* Guardamos el directorio actual
+			qui cd "`path'"
+			qui pwd
+			
+			* Establecemos ruta general
+			loc baseurl "https://proyectos.inei.gob.pe/iinei/srienaho/descarga/STATA"
 		
         foreach m of loc modlist {
             di in green "Importando Módulo `m', año `y'"
 
             * Construimos el nombre del ZIP en la carpeta de destino
-            loc outzip "`path'/modulo_`m'_`year_lab'.zip"
-
+            loc outzip "`path'/modulo_`m'_`year_lab'.rar"
+			loc unzip_dir "`path'/`inei_code'-Modulo`m'"
+			
             * Definir opciones para el comando copy
             loc copyopts
             if "`replace'" != "" {
                 loc copyopts ", replace"
             }
-
+			
             copy "`baseurl'/`inei_code'-Modulo`m'.zip" ///
                  "`outzip'" `copyopts'
 
@@ -241,32 +243,91 @@ program define enahodata
               7. Descomprimir si el usuario pide la opción `descomprimir`
             ***********************************************************/
             if "`descomprimir'" != "" {
-                di in green "Iniciando proceso de descompresión..."
-
+                
                 * Creamos la carpeta final donde queremos los .dta (aplanado)
-                cap mkdir  "`path'\modulo_`m'_`year_lab_'"
-                loc ffiles "`path'\modulo_`m'_`year_lab_'"
-		
-                * 1) Descomprimir sólo los .dta en la carpeta temporal
-                qui cap unzipfile "`outzip'", replace ifilter(".*\.dta$") 
-                sleep 1500
+                cap mkdir  "`path'/modulo_`m'_`year_lab'"
+                loc ffiles "`path'/modulo_`m'_`year_lab'"
+				loc rffiles "`path'/`inei_code'-Modulo`m'/`inei_code'-Modulo`m'"
 
-                * 2) Mover (o copiar) todos los .dta a la carpeta final (aplanado)
-				qui cd "`path'/`inei_code'-Modulo`m'_"
-                local dtalist : dir . files "*.dta"
-                foreach f of local dtalist {
+				* Crear una carpeta de destino para los archivos extraídos
+				cap mkdir "`unzip_dir'"
+
+				* Descomprimir solo archivos .dta usando WinRAR
+				loc rar_file "`outzip'"
+				
+				* Definir las rutas posibles de WinRAR
+				loc winrar_paths   "C:\Program Files\WinRAR\winrar.exe" 		///
+								   "C:\Program Files (x86)\WinRAR\winrar.exe" 	///
+								   "D:\Program Files\WinRAR\winrar.exe" 		///
+								   "D:\Program Files (x86)\WinRAR\winrar.exe" 	///
+								   "E:\Program Files\WinRAR\winrar.exe" 		///
+								   "E:\Program Files (x86)\WinRAR\winrar.exe" 	///
+								   "C:\WinRAR\winrar.exe" 						///
+								   "C:\Archivos de programa\WinRAR\winrar.exe"
+
+				* Inicializar la variable de la ruta de WinRAR
+				loc winrar_path ""
+
+				* Recorrer todas las posibles rutas de WinRAR
+				foreach paths of loc winrar_paths {
+					cap confirm file "`paths'"
+					if _rc == 0 {
+						loc winrar_path "`paths'"
+						*di in green "WinRAR encontrado en: `winrar_path'"
+						break
+					}
+				}
+
+				* Verificar si se encontró WinRAR
+				if "`winrar_path'" == "" {
+					di in red "No se encontró WinRAR en las rutas comunes. Por favor, verifica la instalación."
+					exit 1
+				}
+
+				* Verificar si el archivo .rar existe
+				cap confirm file "`rar_file'"
+				if _rc != 0 {
+					*di in red "El archivo `.rar` no se encontró en la ruta especificada: `rar_file`."
+					exit 1
+				}
+
+				* Verificar si la carpeta de destino para descompresión existe
+				cap confirm directory "`unzip_dir'"
+				if _rc != 0 {
+					*di in yellow "La carpeta de destino `unzip_dir` no existe. Se procederá a crearla."
+					cap mkdir "`unzip_dir'"
+				}
+
+				* Descomprimir usando la ruta de WinRAR encontrada
+				di in green "Iniciando descompresión..."
+				shell "`winrar_path'" x -o+ "`rar_file'" "`unzip_dir'\"
+
+				di in yellow "Descompresión completa."
+
+				sleep 1500
+				
+                * Mover todos los .dta a la carpeta final (aplanado)
+				qui cd "`rffiles'"
+                loc dtalist : dir . files "*.dta"
+                foreach f of loc dtalist {
                     copy "`f'" "`ffiles'/`f'", replace
 						sleep 100
 					erase "`f'"
+					
+                }
+				* Borrar files
+				loc dtalist : dir . files "*"
+                foreach i of loc dtalist {
+					erase "`i'"
+					
                 }
 
-                * 3) Borrar el .zip (ya no lo necesitamos)
+				* Borrar el .zip y folders innecesarios
 				qui cd "`path'"
-                erase  "`outzip'"
-		cap rmdir "`inei_code'-Modulo`m'_"
-		* Regresamos a la carpeta anterior
-                cd "`olddir'"
-
+				erase  "`outzip'"
+				cap rmdir "`rffiles'"
+				cap rmdir "`inei_code'-Modulo`m'"
+			
                 /***********************************************************
                   8. Si se pidió `load`, buscamos y cargamos el .dta
                 ***********************************************************/
@@ -274,7 +335,7 @@ program define enahodata
                     * Nos movemos a la carpeta final (ya aplanada)
                     qui cd "`ffiles'"
 
-		* Encoding: convertir cada .dta a unicode-latin1 
+				* Encoding: convertir cada .dta a unicode-latin1 
                     loc files : dir . files "*.dta"
                     foreach f of loc files {
                         clear all
@@ -284,11 +345,11 @@ program define enahodata
                     }
 					
                     * Lista de archivos .dta
-                    local dtafiles : dir "." files "*.dta"
+                    loc dtafiles : dir "." files "*.dta"
 
                     * Cargar el primer archivo .dta que se encuentre
-                    local found = 0
-                    foreach file of local dtafiles {
+                    loc found = 0
+                    foreach file of loc dtafiles {
                         qui use "`file'", clear
 
                         * Aplicar la condición si se especificó
@@ -299,15 +360,19 @@ program define enahodata
 
                         loc found = 1
                         *di as green "Archivo .dta cargado: `file'"
-                        exit
+                       
                     }
 
                     * Si no se encontró ningún archivo .dta
                     if `found' == 0 {
                         di as error "No se encontró ningún archivo .dta para cargar."
                     }
+					
+
                 }
+
             }
+				
         }
     }
 end
