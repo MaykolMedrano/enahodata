@@ -1,5 +1,5 @@
 *! enahodata: 
-*! Version 0.0.21: 2025/02/06
+*! Version 0.0.2: 2025/02/06
 *! Author: Maykol Medrano
 *! Institute of Economics
 *! UC
