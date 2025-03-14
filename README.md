@@ -148,7 +148,7 @@ enahodata, modulo("01") año("2023") path("/path/to/your/directory") descomprimi
     
 3.  Si se especificó descomprimir, crea la carpeta `/path/to/your/directory/modulo_01_2023` y extrae los .dta.
     
-4.  Si se incluyó load, busca un .dta mayor a 5 MB y lo **carga en memoria**.
+4.  Si se incluyó load, busca un .dta y lo **carga en memoria**.
     
 5.  Aplica condition(), si está definida.
     
@@ -171,7 +171,7 @@ enahodata, modulo("1474") año("2023") panel path("/path/to/your/directory") des
     
 3.  Lo descomprime en `/path/to/your/directory/modulo_1474_2023`.
     
-4.  Carga en memoria el primer .dta encontrado que supere los 5 MB.
+4.  Carga en memoria el primer .dta.
     
 5.  Elimina el ZIP tras cargar, si así está definido en la lógica interna.
     
