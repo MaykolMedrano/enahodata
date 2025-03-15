@@ -206,12 +206,7 @@ Usa Stata 18 para evitar errores en el uso del comando.
 
 Si utilizas **ENAHODATA** en tu investigación o trabajo académico, por favor considera citar este repositorio de la siguiente manera:
 
-### Formato APA
-
-```plaintext
-Medrano M. (2025). ENAHODATA (versión Stata) [Software]. GitHub. (https://github.com/MaykolMedrano/enahodata)
-```
----
+Maykol Medrano. (2025). *MaykolMedrano/enahodata: Stata command that automates the download of the modules of the National Household Survey (v0.0.2)*. Zenodo. [https://doi.org/10.5281/zenodo.15029906](https://doi.org/10.5281/zenodo.15029906)
 
 Licencia
 --------
