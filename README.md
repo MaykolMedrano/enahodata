@@ -1,3 +1,4 @@
+[![DOI](https://zenodo.org/badge/911861535.svg)](https://doi.org/10.5281/zenodo.15029825)
 
 enahodata (versión Stata)
 =========================
