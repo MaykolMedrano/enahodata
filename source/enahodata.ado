@@ -75,7 +75,15 @@ program define enahodata
          5a. Si es ENAHO PANEL (do_panel=1)
         *******************************************************/
         if `do_panel' == 1 {
-            if "`y'"=="2023" {
+            if "`y'"=="2025" {
+                loc inei_code 000
+                loc year_lab 2025
+            }
+            else if "`y'"=="2024" {
+                loc inei_code 966
+                loc year_lab 2024
+            }
+            else if "`y'"=="2023" {
                 loc inei_code 912
                 loc year_lab 2023
             }
