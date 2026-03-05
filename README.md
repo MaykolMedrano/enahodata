@@ -4,10 +4,11 @@
   
 **Automated download and extraction of Peru's National Household Survey (ENAHO) with support for cross-sectional and panel data.**
 
-[![DOI](https://zenodo.org/badge/240158152.svg)](https://doi.org/10.5281/zenodo.15029905)
-[![PyPI version](https://img.shields.io/pypi/v/enahodata?style=flat-square&color=blue)](https://pypi.org/project/enahodata)
-[![Stata](https://img.shields.io/badge/Stata-14%2B-blue)](https://www.stata.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![DOI](https://zenodo.org/badge/240158152.svg)](https://zenodo.org/badge/latestdoi/240158152)
+[![Stata](https://img.shields.io/badge/Stata-14%2B-blue?style=flat-square)](https://www.stata.com/)
+[![Stars](https://img.shields.io/github/stars/MaykolMedrano/enahodata?style=flat-square&color=blue)](https://github.com/MaykolMedrano/enahodata/stargazers)
+[![Forks](https://img.shields.io/github/forks/MaykolMedrano/enahodata?style=flat-square&color=blue)](https://github.com/MaykolMedrano/enahodata/network/members)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
 </div>
 
