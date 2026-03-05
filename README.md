@@ -1,11 +1,17 @@
+<div align="center">
+  
+# enahodata
+  
+**Automated download and extraction of Peru's National Household Survey (ENAHO) with support for cross-sectional and panel data.**
+
 [![DOI](https://zenodo.org/badge/240158152.svg)](https://doi.org/10.5281/zenodo.15029905)
+[![PyPI version](https://img.shields.io/pypi/v/enahodata?style=flat-square&color=blue)](https://pypi.org/project/enahodata)
+[![Stata](https://img.shields.io/badge/Stata-14%2B-blue)](https://www.stata.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-enahodata (versión Stata)
-=========================
+</div>
 
-Actualizado al 06/02/2025
-
-Este **comando** de **Stata**, llamado enahodata, permite **descargar** y (opcionalmente) **descomprimir** los datos de la **Encuesta Nacional de Hogares (ENAHO)**, la cual se realiza cada año desde 2004 en Perú. Además, incluye la **opción** para descargar **datos de panel** (ENAHO PANEL).
+---
 
 > **Ficha técnica**: [Consulta aquí](https://proyectos.inei.gob.pe/iinei/srienaho/Descarga/FichaTecnica/498-Ficha.pdf)
 
@@ -19,7 +25,6 @@ Contenido
 - [III. Ejemplos Prácticos](#iii-ejemplos-prácticos)
 - [IV. Cómo Citar este Repositorio](#iv-cómo-citar-este-repositorio)
 - [Licencia](#licencia)
-    
 
 Módulos de la Encuesta Nacional de Hogares (ENAHO)
 --------------------------------------------------
@@ -82,12 +87,15 @@ Por favor, tenga en cuenta que, en la información de los datos de panel, los c�
 
 I. Instalación
 --------------
+
 Copie el siguiente codigo en Stata y ejecute.
+
 ```
 *Install enahodata (remove program if it existed previously)
 cap ado uninstall enahodata 
 net install enahodata, from(https://github.com/MaykolMedrano/enahodata/raw/master/source/)
 ```
+
 **Advertencia importante:** Este comando está diseñado para funcionar exclusivamente en **Windows**. Además, es esencial que el usuario tenga **WinRAR** instalado en su computadora. Si WinRAR no está instalado, el comando no funcionará correctamente y se presentarán errores en la ejecución. Asegúrese de tener WinRAR instalado antes de ejecutar este código para evitar problemas.
 
 II. Descripción del comando
@@ -110,26 +118,25 @@ enahodata,                ///
   ]
 ```
 
-### Parámetros:
+### Parámetros
 
-*   **MODulo(string)**: lista de **códigos** de módulo (por ejemplo, "01 02 03").
-    
-*   **año(string)**: lista de **años** (por ejemplo, "2022 2023").
-    
-*   **panel**: (opcional) indica que se descarga la **ENAHO panel** en lugar de la ENAHO regular.
-    
-*   **path(string)**: ruta de la carpeta de destino para guardar los ZIP y/o descomprimir.
-    
-*   **DEScomprimir**: si se incluye, se descomprime el ZIP.
-    
-*   **PREServe**: (opcional) para guardar el estado actual de la data.
-    
-*   **condition(string)**: (opcional) para filtrar observaciones si se **carga** un .dta.
-    
-*   **replace**: si se incluye, sobrescribe archivos existentes.
-    
-*   **load**: si se incluye, busca y **carga** en memoria, adicionalmente realiza el enconding respectivo para reconocer caracteres especiales.
-    
+- **MODulo(string)**: lista de **códigos** de módulo (por ejemplo, "01 02 03").
+
+- **año(string)**: lista de **años** (por ejemplo, "2022 2023").
+
+- **panel**: (opcional) indica que se descarga la **ENAHO panel** en lugar de la ENAHO regular.
+
+- **path(string)**: ruta de la carpeta de destino para guardar los ZIP y/o descomprimir.
+
+- **DEScomprimir**: si se incluye, se descomprime el ZIP.
+
+- **PREServe**: (opcional) para guardar el estado actual de la data.
+
+- **condition(string)**: (opcional) para filtrar observaciones si se **carga** un .dta.
+
+- **replace**: si se incluye, sobrescribe archivos existentes.
+
+- **load**: si se incluye, busca y **carga** en memoria, adicionalmente realiza el enconding respectivo para reconocer caracteres especiales.
 
 III. Ejemplo práctico
 ---------------------
@@ -141,20 +148,20 @@ III. Ejemplo práctico
 ```
 enahodata, modulo("01") año("2023") path("/path/to/your/directory") descomprimir load replace
 ```
+
 **Comportamiento**:
 
-1.  Baja el archivo 906-Modulo01.zip desde la URL oficial.
-    
-2.  Lo almacena en `/path/to/your/directory/modulo_01_2023.zip`.
-    
-3.  Si se especificó descomprimir, crea la carpeta `/path/to/your/directory/modulo_01_2023` y extrae los .dta.
-    
-4.  Si se incluyó load, busca un .dta y lo **carga en memoria**.
-    
-5.  Aplica condition(), si está definida.
-    
-6.  Sobrescribe (replace) todo si ya existían archivos.
-    
+1. Baja el archivo 906-Modulo01.zip desde la URL oficial.
+
+2. Lo almacena en `/path/to/your/directory/modulo_01_2023.zip`.
+
+3. Si se especificó descomprimir, crea la carpeta `/path/to/your/directory/modulo_01_2023` y extrae los .dta.
+
+4. Si se incluyó load, busca un .dta y lo **carga en memoria**.
+
+5. Aplica condition(), si está definida.
+
+6. Sobrescribe (replace) todo si ya existían archivos.
 
 ### 2) Descargar ENAHO Panel
 
@@ -166,23 +173,24 @@ enahodata, modulo("1474") año("2023") panel path("/path/to/your/directory") des
 
 **Comportamiento**:
 
-1.  Usa la tabla de códigos **panel** y detecta que 2023 corresponde a inei_code=912.
-    
-2.  Descarga 912-Modulo1474.zip y lo guarda en `/path/to/your/directory/modulo_1474_2023.zip`.
-    
-3.  Lo descomprime en `/path/to/your/directory/modulo_1474_2023`.
-    
-4.  Carga en memoria el primer .dta.
-    
-5.  Elimina el ZIP tras cargar, si así está definido en la lógica interna.
-    
+1. Usa la tabla de códigos **panel** y detecta que 2023 corresponde a inei_code=912.
+
+2. Descarga 912-Modulo1474.zip y lo guarda en `/path/to/your/directory/modulo_1474_2023.zip`.
+
+3. Lo descomprime en `/path/to/your/directory/modulo_1474_2023`.
+
+4. Carga en memoria el primer .dta.
+
+5. Elimina el ZIP tras cargar, si así está definido en la lógica interna.
 
 ### 3) Descargar sin descomprimir
 
 Si quieres **solo** descargar el ZIP (sin descomprimir ni cargar en memoria):
+
 ```
 enahodata, modulo("01") año("2022") path("/path/to/your/directory") replace
 ```
+
 **No** incluyes ni descomprimir ni load. De esa manera, el ZIP se mantendrá **intacto** en la carpeta destino.
 
 ### 4) Descargar varios años y módulos
@@ -192,15 +200,16 @@ Supón que deseas **módulos 01 y 02** para **2022 y 2023**. Sencillamente:
 ```
 enahodata, modulo("01 02") año("2022 2023") path("/path/to/your/directory") descomprimir load
 ```
+
 Generará todas las combinaciones (2022 - 01, 2022 - 02, 2023 - 01, 2023 - 02) y seguirá la misma lógica para cada par.
 
 ### Notas
 
-Los datos se descargarán en formato zip. Es necesario crear una carpeta. 
+Los datos se descargarán en formato zip. Es necesario crear una carpeta.
+
 - Más información en el archivo de ayuda (help file)
 
 Usa Stata 18 para evitar errores en el uso del comando.
-
 
 ## 5). Cómo citar este repositorio
 
@@ -212,5 +221,3 @@ Licencia
 --------
 
 Este repositorio está autorizado bajo la **licencia MIT**. Ver [LICENSE](https://chatgpt.com/c/LICENSE) para más detalles.
-
-
